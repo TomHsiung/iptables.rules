@@ -6,4 +6,3 @@ iptables -t nat -I POSTROUTING 3 --protocol ICMP -s x.x.x.x/x -o ethx -j SNAT --
 #For dynamic gateway IP address
 iptables -t nat -I POSTROUTING 1 -d x.x.x.x/x -o eth0 -p udp -m multiport --dports x,y -j MASQUERADE --to-ports x-x'
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-d
