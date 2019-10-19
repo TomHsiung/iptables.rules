@@ -6,4 +6,4 @@ iptables -t mangle -I FORWARD 2 -m policy --pol ipsec --dir out --protocol TCP -
 iptables -t filter -I INPUT 1 -m policy --pol ipsec --dir in --protocol TCP --dport 22 -m state --state NEW -j ACCEPT
 
 # Exception to masquerade rule(s) for packets about to pass through IPsec tunnel (strongSwan site-to-site mode)
--A POSTROUTING -s x.x.x.x/x -m policy --dir out --pol ipsec -j ACCEPT
+iptables -t nat -I POSTROUTING x -s x.x.x.x/x -m policy --dir out --pol ipsec -j ACCEPT
