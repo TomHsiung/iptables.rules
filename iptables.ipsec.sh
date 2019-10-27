@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # tcpmss artificat modification in order to match MTU (site-to-site mode)
-iptables -t mangle -I FORWARD 1 -s 192.168.1.0/24 -m policy --pol ipsec --dir in --protocol TCP --tcp-flags SYN,RST SYN -m tcpmss --mss 1407:65495 -j TCPMSS --set-mss 1406
-iptables -t mangle -I FORWARD 2 -d 192.168.1.0/24 -m policy --pol ipsec --dir out --protocol TCP --tcp-flags SYN,RST SYN -m tcpmss --mss 1407:65495 -j TCPMSS --set-mss 1406
-iptables -t mangle -I INPUT 1 -s 192.168.1.0/24 -m policy --pol ipsec --dir in --protocol TCP --tcp-flags SYN,RST SYN -m tcpmss --mss 1407:65495 -j TCPMSS --set-mss 1406
+iptables -t mangle -I FORWARD 1 -s x.x.x.x/x -m policy --pol ipsec --dir in --protocol TCP --tcp-flags SYN,RST SYN -m tcpmss --mss 1407:65495 -j TCPMSS --set-mss 1406
+iptables -t mangle -I FORWARD 2 -d x.x.x.x/x -m policy --pol ipsec --dir out --protocol TCP --tcp-flags SYN,RST SYN -m tcpmss --mss 1407:65495 -j TCPMSS --set-mss 1406
+iptables -t mangle -I INPUT 1 -s x.x.x.x/x -m policy --pol ipsec --dir in --protocol TCP --tcp-flags SYN,RST SYN -m tcpmss --mss 1407:65495 -j TCPMSS --set-mss 1406
 
 # tcpmss artificat modification in order to match MTU (roadwarrior mode)
 iptables -t mangle -I FORWARD 1 -m policy --pol ipsec --dir in --protocol TCP --tcp-flags SYN,RST SYN -m tcpmss --mss 1361:65495 -j TCPMSS --set-mss 1360
