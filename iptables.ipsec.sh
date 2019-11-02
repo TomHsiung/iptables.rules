@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set the appropriate direction of iptables rules based on the packet flow direction
-# For some reasons, packets not reaching the maximum MTU size would be fragmented.
+# For some reasons, packets not reaching the maximum MTU size would be fragmented. We use a value whcih equls 8 bytes substracting from the maximum MTU.
 
 # tcpmss artificat modification in order to math MTU (two layers of tunnel)
 iptables -t mangle -I FORWARD 1 -s x.x.x.x/x -m policy --pol ipsec --dir in --protocol TCP --tcp-flags SYN,RST SYN -m tcpmss --mss 1325:65495 -j TCPMSS --set-mss 1324
