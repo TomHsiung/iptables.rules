@@ -22,3 +22,8 @@ iptables -t filter -I INPUT 1 -m policy --pol ipsec --dir in --protocol TCP --dp
 
 # Exception to masquerade rule(s) for packets about to pass through IPsec tunnel (strongSwan site-to-site mode)
 iptables -t nat -I POSTROUTING x -s x.x.x.x/x -m policy --dir out --pol ipsec -j ACCEPT
+
+# Port modification rules
+iptables -t nat -I POSTROUTING 1 -d x.x.x.x/x -o eth0 -p udp -m multiport --dports xxx -j MASQUERADE --to-ports xxx-xxx
+iptables -t nat -I PREROUTING 1 -d x.x.x.x/x -i eth0 -p udp -m multiport --dports xxx -j DNAT --to-destination x.x.x.x:xxx
+iptables -t nat -I OUTPUT 1 -d x.x.x.x/x -o eth0 -p udp -m multiport --dports xxx -j DNAT --to-destination x.x.x.x:xxx
